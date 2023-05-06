@@ -37,6 +37,17 @@ function scrub(e) {
     video.currentTime = scrubTime;
 }
 
+function handleFullscreen() {
+    console.log("double clicked");
+    if(player.requestFullscreen) {
+        player.requestFullscreen();
+    } else if (player.webkitRequestFullScreen) {
+        player.webkitRequestFullScreen();
+    } else if (player.msRequestFullscreen) {
+        player.msRequestFullscreen();
+    }
+}
+
 // EventListeners 
 
 video.addEventListener('click', togglePlay);
@@ -53,3 +64,5 @@ let mousedown = false;
 progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
 progress.addEventListener('mousedown', () => mousedown = true);
 progress.addEventListener('mouseup', () => mousedown = false);
+
+player.addEventListener('dblclick', handleFullscreen);
